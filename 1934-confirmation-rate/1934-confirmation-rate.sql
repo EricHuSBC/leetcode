@@ -1,7 +1,7 @@
 # Write your MySQL query statement below
 
 
-SELECT A.user_id, COALESCE(ROUND(B.conf_count/A.act_count, 2),0) AS confirmation_rate FROM 
+SELECT A.user_id, IFNULL(ROUND(B.conf_count/A.act_count, 2),0) AS confirmation_rate FROM 
 (SELECT S.user_id,COUNT(S.user_id) AS act_count FROM Signups AS S
 LEFT JOIN Confirmations AS C ON S.user_id = C.user_id
 GROUP BY S.user_id) AS A
